@@ -1,1 +1,7 @@
-<p>settings-sidebar works!</p>
+<form [formGroup]="settingsForm">
+  <h2>Pattern settings</h2>
+  <label>Side A: {{settingsForm?.value?.sideA}}</label>
+  <mat-slider formControlName="sideA" min="2" max="30" [thumbLabel]="true"></mat-slider>
+  <label>Side B: {{settingsForm?.value?.sideB}}</label>
+  <mat-slider formControlName="sideB" min="2" max="30" [thumbLabel]="true"></mat-slider>
+</form>
