@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "pg",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -120,5 +120,10 @@
       }
     }
   },
-  "defaultProject": "pattern-generator"
+  "defaultProject": "pattern-generator",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }
