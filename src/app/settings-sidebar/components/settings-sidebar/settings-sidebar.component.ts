@@ -1,31 +1,30 @@
-import {Component, EventEmitter, HostBinding, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PatternConfigService } from '../../services/pattern-config/pattern-config.service';
 
-export interface IPatternSettings {
-  sideA: number;
-  sideB: number;
-}
 
 @Component({
   selector: 'pg-settings-sidebar',
   templateUrl: './settings-sidebar.component.html',
-  styleUrls: ['./settings-sidebar.component.scss']
+  styleUrls: [ './settings-sidebar.component.scss' ],
 })
 export class SettingsSidebarComponent implements OnInit, OnDestroy {
-  @Output() public settingsChange: EventEmitter<IPatternSettings> = new EventEmitter<IPatternSettings>()
   @HostBinding('class.mat-elevation-z8') public elevation: boolean = true;
   public settingsForm: FormGroup = new FormGroup({
-    sideA: new FormControl(2),
-    sideB: new FormControl(2),
+    sideA: new FormControl(13), sideB: new FormControl(15),
   });
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
+  constructor(private _patternConfigService: PatternConfigService) { }
+
   ngOnInit(): void {
     this.settingsForm.valueChanges
-      .pipe(takeUntil(this._unsubscribe$))
-      .subscribe(value => this.settingsChange.emit(value));
+        .pipe(takeUntil(this._unsubscribe$))
+        .subscribe(value => this._patternConfigService.updateConfig(value));
+
+    this._patternConfigService.updateConfig(this.settingsForm.value);
   }
 
   public ngOnDestroy(): void {

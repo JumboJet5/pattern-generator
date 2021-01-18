@@ -6,11 +6,13 @@ import { SettingsSidebarComponent } from './settings-sidebar/components/settings
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import {ReactiveFormsModule} from "@angular/forms";
+import { PatternCellComponent } from './settings-sidebar/components/pattern-cell/pattern-cell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsSidebarComponent
+    SettingsSidebarComponent,
+    PatternCellComponent
   ],
   imports: [
     BrowserModule,

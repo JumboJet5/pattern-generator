@@ -1,0 +1,5 @@
+<div class="row-wrapper" *ngFor="let rows of rows; index as row">
+  <div *ngFor="let cell of columns; index as column"
+       [class.marked]="patternConfigService.isCellCPaintedOver(row, column)"
+       class="colored-cell"></div>
+</div>
