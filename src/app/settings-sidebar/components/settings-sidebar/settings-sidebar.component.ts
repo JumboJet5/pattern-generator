@@ -13,7 +13,9 @@ import { PatternConfigService } from '../../services/pattern-config/pattern-conf
 export class SettingsSidebarComponent implements OnInit, OnDestroy {
   @HostBinding('class.mat-elevation-z8') public elevation: boolean = true;
   public settingsForm: FormGroup = new FormGroup({
-    sideA: new FormControl(13), sideB: new FormControl(15),
+    sideA: new FormControl(28),
+    sideB: new FormControl(20 ),
+    color:  new FormControl('#91f4c4')
   });
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -24,7 +26,7 @@ export class SettingsSidebarComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this._unsubscribe$))
         .subscribe(value => this._patternConfigService.updateConfig(value));
 
-    this._patternConfigService.updateConfig(this.settingsForm.value);
+    setTimeout(() => this._patternConfigService.updateConfig(this.settingsForm.value));
   }
 
   public ngOnDestroy(): void {

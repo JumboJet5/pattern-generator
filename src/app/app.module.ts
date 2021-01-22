@@ -7,12 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import {ReactiveFormsModule} from "@angular/forms";
 import { PatternCellComponent } from './settings-sidebar/components/pattern-cell/pattern-cell.component';
+import { PatternCanvasComponent } from './settings-sidebar/components/pattern-canvas/pattern-canvas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsSidebarComponent,
-    PatternCellComponent
+    PatternCellComponent,
+    PatternCanvasComponent
   ],
   imports: [
     BrowserModule,
