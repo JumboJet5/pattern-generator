@@ -3,26 +3,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IPatternSettings } from '../../interfaces/pattren-settings';
 
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class PatternConfigService {
-  private _color: string;
+  private _patternConfig: IPatternSettings;
 
-  public get color(): string {
-    return this._color;
-  }
-
-  private _sideA: number;
-
-  public get sideA(): number {
-    return this._sideA;
-  }
-
-  private _sideB: number;
-
-  public get sideB(): number {
-    return this._sideB;
+  public get patternConfig(): IPatternSettings {
+    return this._patternConfig;
   }
 
   private _updates$: BehaviorSubject<IPatternSettings> = new BehaviorSubject<IPatternSettings>(null);
@@ -33,10 +19,11 @@ export class PatternConfigService {
 
   private _patternSet: Set<number>;
 
-  public updateConfig({ sideA, sideB, color }: IPatternSettings): void {
-    this._sideA = sideA;
-    this._sideB = sideB;
-    this._color = color;
+  public updateConfig(patternConfig: IPatternSettings): void {
+    if (!patternConfig) return;
+
+    const { sideA, sideB } = patternConfig;
+    this._patternConfig = patternConfig;
     this._patternSet = new Set<number>();
 
     const patternLength = sideA * sideB;
@@ -48,10 +35,11 @@ export class PatternConfigService {
       this._patternSet.add(equalRow * sideA + equalColumn);
     }
 
-    this._updates$.next({ sideA, sideB, color });
+    this._updates$.next(patternConfig);
   }
 
   public isCellCPaintedOver(x: number, y: number): boolean {
-    return this._patternSet.has((x % this.sideB) * this._sideA + (y % this.sideA));
+    const { sideA, sideB } = this.patternConfig || {};
+    return this._patternSet.has((x % sideB) * sideA + (y % sideA));
   }
 }

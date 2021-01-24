@@ -8,11 +8,11 @@ import { PatternConfigService } from '../../services/pattern-config/pattern-conf
 })
 export class PatternCellComponent {
   get rows(): number[] {
-    return PatternCellComponent._generateArray(this.patternConfigService.sideB);
+    return PatternCellComponent._generateArray(this.patternConfigService.patternConfig?.sideB);
   }
 
   get columns(): number[] {
-    return PatternCellComponent._generateArray(this.patternConfigService.sideA);
+    return PatternCellComponent._generateArray(this.patternConfigService.patternConfig?.sideA);
   }
 
   constructor(public patternConfigService: PatternConfigService) { }

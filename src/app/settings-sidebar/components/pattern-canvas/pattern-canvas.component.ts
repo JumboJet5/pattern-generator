@@ -33,17 +33,16 @@ export class PatternCanvasComponent implements OnInit, OnDestroy {
   }
 
   public updatePattern(): void {
-    const blockSize = 5;
+    const blockSize = this.patternConfigService.patternConfig?.cellSize;
     const width = this._element.nativeElement.clientWidth;
     const height = this._element.nativeElement.clientHeight;
-    console.log(width, height)
 
     this.patternCanvas.nativeElement.width = width;
     this.patternCanvas.nativeElement.height = height;
 
     const ctx = this.patternCanvas?.nativeElement.getContext('2d');
 
-    ctx.fillStyle = this.patternConfigService.color;
+    ctx.fillStyle = this.patternConfigService.patternConfig?.color;
 
     for (let offsetX = 0; offsetX < width; offsetX += blockSize) {
       for (let offsetY = 0; offsetY < height; offsetY += blockSize) {

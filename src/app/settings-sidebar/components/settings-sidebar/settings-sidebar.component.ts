@@ -15,7 +15,8 @@ export class SettingsSidebarComponent implements OnInit, OnDestroy {
   public settingsForm: FormGroup = new FormGroup({
     sideA: new FormControl(28),
     sideB: new FormControl(20 ),
-    color:  new FormControl('#91f4c4')
+    color:  new FormControl('#91f4c4'),
+    cellSize: new FormControl(20),
   });
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
